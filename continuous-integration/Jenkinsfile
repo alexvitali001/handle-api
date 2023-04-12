@@ -12,7 +12,7 @@ pipeline {
                 git url: 'https://github.com/vanessakovalsky/python-api-handle-it.git'
             }
         }
-        stage('continuous integration') { // Compile and do unit testing
+        /*stage('continuous integration') { // Compile and do unit testing
              tools {
                gradle 'installGradle'
              }
@@ -27,7 +27,7 @@ pipeline {
                     }
                 )
              }
-           }
+           }*/
 
         // stage('testcode') {
             //  tools {
@@ -38,14 +38,14 @@ pipeline {
         //     }
         // }
         
-        stage('Package and deploy') {
+        /*stage('Package and deploy') {
              tools {
                gradle 'installGradle'
              }
             steps {
                 sh 'gradle up'
             }
-        }
+        }*/
 
         stage('Build docker image') {
             steps{
@@ -71,10 +71,10 @@ pipeline {
             }
         }
 
-        stage('Deploy to environment') {
+       /* stage('Deploy to environment') {
             steps {
                 sh 'ansible-playbook -i vagrant/k8s-ansible/inventory vagrant/k8s-ansible/k8s-deployment.yml'
             }
-        }
+        }*/
       }
  }
