@@ -5,7 +5,11 @@ pipeline {
         registryCredential = 'docker'
       }
 
-      agent any
+    agent {
+        docker {
+            image 'python3'
+        }
+    }
       stages {
         stage('Clone sources') {
             steps {
