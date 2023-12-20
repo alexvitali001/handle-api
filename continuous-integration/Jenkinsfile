@@ -17,11 +17,7 @@ pipeline {
             }
         }
             stage('Security analysis') {
-		        agent {
-			        docker {
-			            image 'dind'
-			        }
-			    }
+		        agent any
                   steps{
 				sh "docker run --rm --volume \$(pwd) secfigo/bandit:latest"
 			}
