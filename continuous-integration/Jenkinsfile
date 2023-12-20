@@ -19,8 +19,11 @@ pipeline {
 		}
 		stage ("Dependency Check with Python Safety"){
 			steps{
-				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
-				sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
+				catchError {
+					sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check"
+					sh "docker run --rm --volume \$(pwd) pyupio/safety:latest safety check --json > report.json"
+				}
+				echo currentBuild.result
 			}
 		}
 		stage ("Static Analysis with python-taint"){
