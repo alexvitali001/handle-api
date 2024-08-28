@@ -2,8 +2,8 @@ import unittest
 import json
 import HtmlTestRunner
 
-from application import Application
-from machine import Machine
+import application.application.Application as Application
+import machine.machine.Machine as Machine
 
 class TestApplication(unittest.TestCase):
     # Initialisation de données pour mes tests
