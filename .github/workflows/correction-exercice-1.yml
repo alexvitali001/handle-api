@@ -1,7 +1,7 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Python application
+name: Python application  - Correction
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest html-testRunner
+        pip install flake8 html-testRunner
         if [ -f app/requirements.txt ]; then pip install -r app/requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -34,6 +34,6 @@ jobs:
         flake8 app/ --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 app/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Test with unittest
       run: |
         python -m unittest app/test/unit/test.py
