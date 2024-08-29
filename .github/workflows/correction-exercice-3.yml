@@ -13,8 +13,11 @@ jobs:
           python-version: 3.8
       - name: Run unit tests
         run: |
-          pip install pytest
-          pytest
+          pip install html-testRunner
+          cd app
+          python -m unittest test/unit/test.py
+          python -m coverage run -m unittest test/unit/test.py
+          python -m coverage xml
       - name: Wemake Python Stylguide
         uses: wemake-services/wemake-python-styleguide@0.13.4
         continue-on-error: true
