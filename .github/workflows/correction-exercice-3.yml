@@ -13,7 +13,7 @@ jobs:
           python-version: 3.8
       - name: Run unit tests
         run: |
-          pip install html-testRunner
+          pip install html-testRunner coverage
           cd app
           python -m unittest test/unit/test.py
           python -m coverage run -m unittest test/unit/test.py
