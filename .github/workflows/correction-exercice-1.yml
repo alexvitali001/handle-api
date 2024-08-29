@@ -48,8 +48,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Build and push
-      uses: mr-smithers-excellent/docker-build-push@v6
+      uses: docker/build-push-action@v6
       with:
-        image: vanessakovalsky/python-flask-app-github
-        tags: v1, latest
-        dockerfile: docker-app/python/Dockerfile
+        push: true
+        tags: vanessakovalsky/python-flask-app-github:latest
+        file: docker-app/python/Dockerfile
