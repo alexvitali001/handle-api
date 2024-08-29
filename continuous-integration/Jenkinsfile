@@ -1,7 +1,7 @@
 pipeline {
 
       environment {
-        imagename = "vanessakovalsky/my-image-python"
+        registry = "vanessakovalsky/my-image-python"
         registryCredential = 'docker'
       }
 
@@ -38,6 +38,7 @@ pipeline {
 		}
 
         stage('continuous integration') { // Compile and do unit testing
+
              tools {
                gradle 'installGradle'
              }
@@ -52,7 +53,7 @@ pipeline {
                     }
                 )
              }
-           }
+           }*/
 
         // stage('testcode') {
             //  tools {
@@ -63,19 +64,19 @@ pipeline {
         //     }
         // }
         
-        stage('Package and deploy') {
+        /*stage('Package and deploy') {
              tools {
                gradle 'installGradle'
              }
             steps {
                 sh 'cd continuous-integration && gradle up'
             }
-        }
+        }*/
 
         stage('Build docker image') {
             steps{
                 script {
-                    docker.build registry + ":$BUILD_NUMBER"
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 } 
             }       
         }
@@ -96,10 +97,10 @@ pipeline {
             }
         }
 
-        stage('Deploy to environment') {
+       /* stage('Deploy to environment') {
             steps {
                 sh 'ansible-playbook -i vagrant/k8s-ansible/inventory vagrant/k8s-ansible/k8s-deployment.yml'
             }
-        }
+        }*/
       }
  }
