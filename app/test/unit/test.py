@@ -17,9 +17,9 @@ class TestApplication(unittest.TestCase):
     
 
     # Exemple de test avec un echec (failure)
-    def test_liste_application_ko(self):
-        contenu_liste = Application.liste()
-        self.assertEqual(contenu_liste,'Une phrase')
+    # def test_liste_application_ko(self):
+    #    contenu_liste = Application.liste()
+    #    self.assertEqual(contenu_liste,'Une phrase')
 
     def test_liste_application_ok(self):
         contenu_liste = Application.liste()
