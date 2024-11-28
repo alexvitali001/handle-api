@@ -4,7 +4,7 @@ pipeline {
         registry = "vanessakovalsky/my-image-python"
         registryCredential = 'docker'
 	APP_CONTAINER_NAME = "myapppython"
-	DOCKER_IMAGE = registry
+	DOCKER_IMAGE = "vanessakovalsky/my-image-python"
 	DOCKER_TAG = ${BUILD_NUMBER}
       }
 
