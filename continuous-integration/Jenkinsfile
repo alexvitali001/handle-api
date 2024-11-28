@@ -3,6 +3,9 @@ pipeline {
       environment {
         registry = "vanessakovalsky/my-image-python"
         registryCredential = 'docker'
+	APP_CONTAINER_NAME = "myapppython"
+	DOCKER_IMAGE = registry
+	DOCKER_TAG = ${BUILD_NUMBER}
       }
 
      agent any
@@ -86,9 +89,46 @@ pipeline {
             }
         }
 
+	
+        stage('Arrêt du Conteneur Existant') {
+            steps {
+                script {
+                    // Arrêter et supprimer le conteneur existant
+                    sh '''
+                        docker stop ${APP_CONTAINER_NAME} || true
+                        docker rm ${APP_CONTAINER_NAME} || true
+                    '''
+                }
+            }
+        }
+
         stage('Test image docker') {
             steps {
-                sh 'docker run -d --name my-image-python -p 3002:3002 --rm vanessakovalsky/my-image-python'
+                sh 'docker run -d --name ${APP_CONTAINER_NAME} -p 3002:3002 --rm vanessakovalsky/my-image-python'
+            }
+        }
+
+	 stage('Vérification du Déploiement') {
+            steps {
+                script {
+                    // Attendre le démarrage du conteneur
+                    sh 'sleep 30'
+                    
+                    // Test de santé basique
+                    sh 'curl http://localhost:3002/ || exit 1'
+                }
+            }
+        }
+
+	stage('Nettoyage') {
+            steps {
+                script {
+                    // Supprimer les anciennes images
+                    sh '''
+                        docker image prune -f
+                        docker images | grep ${DOCKER_IMAGE} | grep -v ${DOCKER_TAG} | awk \'{print $3}\' | xargs -r docker rmi || true
+                    '''
+                }
             }
         }
 
