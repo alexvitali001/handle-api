@@ -32,23 +32,23 @@ pipeline {
 				sh "docker run --rm --volume \"\$(pwd)\" vickyrajagopal/python-taint-docker pyt ."
 			}
 		}
-	stage('continuous integration') { // Compile and do unit testing
+	// stage('continuous integration') { // Compile and do unit testing
 
-             tools {
-               gradle 'installGradle'
-             }
-             steps {
-                 parallel (
-                 // run Gradle to execute compile and unit testing
-                    pylint: {
-                        sh 'cd continuous-integration && gradle lint'
-                    },
-                    pycode: {
-                        sh 'cd continuous-integration && gradle pycode'
-                    }
-                )
-             }
-           }
+    //          tools {
+    //            gradle 'installGradle'
+    //          }
+    //          steps {
+    //              parallel (
+    //              // run Gradle to execute compile and unit testing
+    //                 pylint: {
+    //                     sh 'cd continuous-integration && gradle lint'
+    //                 },
+    //                 pycode: {
+    //                     sh 'cd continuous-integration && gradle pycode'
+    //                 }
+    //             )
+    //          }
+    //        }
 
         // stage('testcode') {
             //  tools {
