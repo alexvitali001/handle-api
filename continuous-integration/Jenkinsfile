@@ -104,7 +104,7 @@ pipeline {
 
         stage('Test image docker') {
             steps {
-                sh 'docker run -d --name ${APP_CONTAINER_NAME} -p 3002:3002 --rm vanessakovalsky/my-image-python'
+                sh 'docker run -d --name ${APP_CONTAINER_NAME} -p 3002:5000 --rm vanessakovalsky/my-image-python:${DOCKER_TAG}'
             }
         }
 
