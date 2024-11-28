@@ -5,6 +5,8 @@ pipeline {
         registryCredential = 'docker'
       }
 
+     agent any
+
       stages {
         stage('Clone sources') {
             steps {
