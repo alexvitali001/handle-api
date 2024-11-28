@@ -5,7 +5,7 @@ pipeline {
         registryCredential = 'docker'
 	APP_CONTAINER_NAME = "myapppython"
 	DOCKER_IMAGE = "vanessakovalsky/my-image-python"
-	DOCKER_TAG = ${BUILD_NUMBER}
+	DOCKER_TAG = "${env.BUILD_NUMBER}"
       }
 
      agent any
